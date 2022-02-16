@@ -3,16 +3,23 @@ package com.shirobutton.common_mvvm
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import com.bumptech.glide.Glide
 import com.shirobutton.common_mvvm.databinding.FragmentHomeBinding
 
 class HomeFragment: Fragment(R.layout.fragment_home) {
+
+    private val viewModel: HomeViewModel by viewModels()
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val binding = FragmentHomeBinding.bind(view)
         val imageView = binding.imageView
-        Glide.with(imageView)
-            .load("https://purr.objects-us-east-1.dream.io/i/tumblr_luhf8e8rwh1qaoexto1_1280.jpg")
-            .into(imageView)
+        viewModel.imageUrlObservable.observe(viewLifecycleOwner) {
+            Glide.with(imageView)
+                .load(it)
+                .into(imageView)
+        }
+        viewModel.fetch()
     }
 }
