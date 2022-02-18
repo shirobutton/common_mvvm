@@ -16,4 +16,6 @@ object ApiClient {
         .baseUrl("https://aws.random.cat")
         .addConverterFactory(MoshiConverterFactory.create(moshi))
         .build()
+
+    val randomCatApi = retrofit.create(RandomCatApi::class.java)
 }
