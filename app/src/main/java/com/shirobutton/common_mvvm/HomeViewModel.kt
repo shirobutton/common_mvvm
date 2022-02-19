@@ -10,11 +10,16 @@ class HomeViewModel : ViewModel() {
     private val mutableImageUrlObservable = MutableLiveData<String>()
     val imageUrlObservable: LiveData<String> = mutableImageUrlObservable
 
+    private val mutableErrorObservable = MutableLiveData<Throwable>()
+    val errorObservable: LiveData<Throwable> = mutableErrorObservable
+
     private val repository = HomeRepository()
 
     fun fetch() {
         viewModelScope.launch {
-            mutableImageUrlObservable.value = repository.getImageUrl()
+            repository.getImageUrl()
+                .onSuccess(mutableImageUrlObservable::setValue)
+                .onFailure(mutableErrorObservable::setValue)
         }
     }
 }
