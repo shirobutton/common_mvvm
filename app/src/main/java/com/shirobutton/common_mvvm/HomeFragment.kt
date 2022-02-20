@@ -29,9 +29,6 @@ class HomeFragment: Fragment(R.layout.fragment_home) {
     }
 
     private fun onChangeImage(imageUrl: String?) {
-        val imageView = binding?.imageView ?: return
-        Glide.with(imageView)
-            .load(imageUrl)
-            .into(imageView)
+        binding?.imageView?.load(imageUrl)
     }
 }
