@@ -17,8 +17,8 @@ class HomeFragment: Fragment(R.layout.fragment_home) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel.imageUrlObservable.observe(viewLifecycleOwner,::onChangeImage)
-        viewModel.errorObservable.observe(viewLifecycleOwner) {
+        observe(viewModel.imageUrlObservable, ::onChangeImage)
+        observe(viewModel.errorObservable) {
             Toast.makeText(
                 context,
                 "エラーが起きました",
