@@ -9,5 +9,5 @@ import dagger.hilt.android.components.ViewModelComponent
 @InstallIn(ViewModelComponent::class)
 object RepositoryModule  {
     @Provides
-    fun provideHomeRepository() = HomeRepository()
+    fun provideHomeRepository(randomCatApi: RandomCatApi) = HomeRepository(randomCatApi)
 }

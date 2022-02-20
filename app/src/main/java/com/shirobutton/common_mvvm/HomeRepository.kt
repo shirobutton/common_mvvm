@@ -1,7 +1,7 @@
 package com.shirobutton.common_mvvm
 
-class HomeRepository {
+class HomeRepository (private val randomCatApi: RandomCatApi) {
      suspend fun getImageUrl() = kotlin.runCatching {
-          ApiClient.randomCatApi.getRandomCat().file
+          randomCatApi.getRandomCat().file
      }
 }
