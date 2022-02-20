@@ -5,7 +5,6 @@ import android.view.View
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import com.bumptech.glide.Glide
 import com.shirobutton.common_mvvm.databinding.FragmentHomeBinding
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -29,6 +28,6 @@ class HomeFragment: Fragment(R.layout.fragment_home) {
     }
 
     private fun onChangeImage(imageUrl: String?) {
-        binding?.imageView?.load(imageUrl)
+        binding?.imageUrl = imageUrl
     }
 }
