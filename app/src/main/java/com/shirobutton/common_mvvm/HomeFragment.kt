@@ -12,17 +12,12 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class HomeFragment: Fragment(R.layout.fragment_home) {
 
+    private val binding by viewBinding(FragmentHomeBinding::bind)
     private val viewModel: HomeViewModel by viewModels()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val binding = FragmentHomeBinding.bind(view)
-        val imageView = binding.imageView
-        viewModel.imageUrlObservable.observe(viewLifecycleOwner) {
-            Glide.with(imageView)
-                .load(it)
-                .into(imageView)
-        }
+        viewModel.imageUrlObservable.observe(viewLifecycleOwner,::onChangeImage)
         viewModel.errorObservable.observe(viewLifecycleOwner) {
             Toast.makeText(
                 context,
@@ -31,5 +26,12 @@ class HomeFragment: Fragment(R.layout.fragment_home) {
             ).show()
         }
         viewModel.fetch()
+    }
+
+    private fun onChangeImage(imageUrl: String?) {
+        val imageView = binding?.imageView ?: return
+        Glide.with(imageView)
+            .load(imageUrl)
+            .into(imageView)
     }
 }
