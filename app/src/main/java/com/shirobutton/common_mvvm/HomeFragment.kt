@@ -18,12 +18,12 @@ class HomeFragment: Fragment(R.layout.fragment_home) {
         super.onViewCreated(view, savedInstanceState)
         val binding = FragmentHomeBinding.bind(view)
         val imageView = binding.imageView
-        viewModel.imageUrlObservable.observe(viewLifecycleOwner) {
+        observe(viewModel.imageUrlObservable) {
             Glide.with(imageView)
                 .load(it)
                 .into(imageView)
         }
-        viewModel.errorObservable.observe(viewLifecycleOwner) {
+        observe(viewModel.errorObservable) {
             Toast.makeText(
                 context,
                 "エラーが起きました",
