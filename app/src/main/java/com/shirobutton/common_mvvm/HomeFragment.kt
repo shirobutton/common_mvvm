@@ -18,11 +18,7 @@ class HomeFragment: Fragment(R.layout.fragment_home) {
         super.onViewCreated(view, savedInstanceState)
         val binding = FragmentHomeBinding.bind(view)
         val imageView = binding.imageView
-        observe(viewModel.imageUrlObservable) {
-            Glide.with(imageView)
-                .load(it)
-                .into(imageView)
-        }
+        observe(viewModel.imageUrlObservable, imageView::load)
         observe(viewModel.errorObservable) {
             Toast.makeText(
                 context,
